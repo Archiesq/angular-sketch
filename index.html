@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="sketch">
+<head>
+	<meta charset="UTF-8">
+	<title>sketch</title>
+	<link rel="stylesheet" href="index.css">
+	<script src="angular.js"></script>
+	<script src="index.js"></script>
+</head>
+<body ng-controller="sketchcontroller">
+	<div class="zuo">
+	
+	<ul>
+		<li ng-repeat="(key, value) in tools" ng-click="settool(value)" ng-class="{active:value==tool}">
+			<span>{{key}}</span>
+		</li>
+	</ul>
+		<div ng-class="{active:csState.style=='fill'}"ng-click="setStyle('fill')">填充</div>
+		<input type="color" ng-model="csState.fillStyle" >
+		<div ng-class="{active:csState.style=='stroke'}"ng-click="setStyle('stroke')">画线</div>
+		<input type="color" ng-model="csState.strokeStyle">
+		<div>
+			线宽度<input ng-model="csState.lineWidth" type="range" min="1" max="40" step="1">
+		</div>
+		<div>
+		画布宽度调整
+		<input ng-model="canvasWH.width" type="range" min="400" max="800" step="1">
+		</div>
+		<div>
+		画布高度调整
+		<input ng-model="canvasWH.height" type="range" min="400" max="800" step="1">
+		</div>
+		<div ng-click="newSketch()">新建</div>
+		<a ng-click="save($event)">保存</a>
+		<div>回退</div>
+		
+	</div>
+	<div class="you">
+		<canvas width="{{canvasWH.width}}"  height="{{canvasWH.height}}" id="canvas"></canvas>
+	</div>
+</body>
+</html>
